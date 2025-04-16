@@ -17,13 +17,13 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 20) {
             Text("XOpaws🐾")
-                .font(.largeTitle)
+                .font(.system(size: 36, weight: .bold, design: .rounded))
                 .bold()
             
             Text(winner == nil ? "\(isXTurn ? "🐶" : "🐱")" : "")
                 .font(.title2)
             
-            LazyVGrid(columns: columns, spacing: 15) {
+            LazyVGrid(columns: columns, spacing: 30) {
                 ForEach(0..<9) { index in
                     Button(action: {
                         if board[index] == "" && winner == nil {
@@ -50,6 +50,7 @@ struct ContentView: View {
                 }
             }
         }
+        .padding(20)
         
         if let winner = winner {
             Text(winner == "Draw" ? "🤝 It’s a Draw! Great job, both!" : "Winner: \(winner)")
@@ -57,12 +58,15 @@ struct ContentView: View {
                 .foregroundColor(.green)
         }
         
-        Button("Let’s Play Again! 🔁") {
+            Button("Let’s Play Again! 🔁") {
             board = Array(repeating: "", count: 9)
             isXTurn = true
             winner = nil
+        
         }
-        .padding(.top)
+        .padding()
+        .background(.yellow)
+        .cornerRadius(5)
     }
 
     func checkWinner() {
@@ -84,6 +88,9 @@ struct ContentView: View {
             winner = "Draw"
         }
     }
+}
+#Preview {
+    ContentView()
 }
 
 
